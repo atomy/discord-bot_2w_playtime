@@ -24,6 +24,7 @@ const targetPlayerSteamId = process.env.TARGET_STEAM_ID;
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
+    console.log('Requesting: ' + options.url);
     client.user.setActivity('2-week playtime: ? h', { type: 'WATCHING' } );
     request(options, callback);
 });
