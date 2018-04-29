@@ -24,7 +24,7 @@ const targetPlayerSteamId = process.env.TARGET_STEAM_ID;
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
-    client.user.setActivity('? players playing.', { url: 'http://www.dystopia-game.com', type: 'WATCHING' } );
+    client.user.setActivity('2-week playtime: ? h', { type: 'WATCHING' } );
     request(options, callback);
 });
 
@@ -38,23 +38,32 @@ function callback(error, response, body) {
     if (response.statusCode === 200) {
         const jsonObject = JSON.parse(body);
         var playerGames = jsonObject.response.games;
-        for (var i = 0, count = jsonObject.response.total_count; i < total_count; i++) {
-            var playerGame = playerGames[i];
+        const totalCount = jsonObject.response.total_count;
+        var sumPlayTime = 0;
 
+        for (var i = 0; i < totalCount; i++) {
+            var playerGame = playerGames[i];
+            sumPlayTime += playerGame.playtime_2weeks;
             console.log("retrieved game for '" + playerGame.name + "' is: '" + playerGame.playtime_2weeks + "'");
         }
+
+        if (sumPlayTime > 0) {
+            sumPlayTime = Number((sumPlayTime / 60).toFixed(1));
+        }
+
+        console.log("sum playtime is: " + sumPlayTime);
     }
 
-    // if (!error && response.statusCode == 200 && playerCount >= 0) {
-    //     client.user.setActivity(playerCount + ' players playing', { url: 'http://www.dystopia-game.com', type: 'WATCHING' } );
-    // } else {
-    //     client.user.setActivity('? players playing', { url: 'http://www.dystopia-game.com', type: 'WATCHING' } );
-    // }
+    if (!error && response.statusCode == 200) {
+        client.user.setActivity('2-week playtime: ' + sumPlayTime + ' h', { type: 'WATCHING' } );
+    } else {
+        client.user.setActivity('2-week playtime: ? h', { type: 'WATCHING' } );
+    }
 }
 
 setInterval(function() {
     console.log("Requesting...");
     request(options, callback);
-}, 1000*300);
+}, 1000*1800);
 
 client.login(discordApiKey);
