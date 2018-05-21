@@ -1,5 +1,5 @@
 # Introduction 
-Discord bot that includes the current playercount of a steam game in its present.
+Discord bot to display steam playtime in it's bot presence of a given steam-id
 
 # Requirements
 - API key for Steam
