@@ -52,6 +52,8 @@ function callback(error, response, body) {
             sumPlayTime = Number((sumPlayTime / 60).toFixed(1));
         }
 
+        console.log("sum playtime is: " + sumPlayTime);
+
         if (process.env.TARGET_STEAM_ID2 && process.env.TARGET_STEAM_ID2.length > 0) {
             const options2 = {
                 url: 'http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=' + steamApiKey + '&steamid=' + process.env.TARGET_STEAM_ID2 + '&format=json'
@@ -59,8 +61,6 @@ function callback(error, response, body) {
             request(options2, callback2);
             return;
         }
-
-        console.log("sum playtime is: " + sumPlayTime);
     }
 
     if (!error && response.statusCode == 200) {
@@ -89,6 +89,7 @@ function callback2(error, response, body) {
             sumPlayTime = Number(((sumPlayTime + sumPlayTime2) / 60).toFixed(1));
         }
 
+        console.log("sum2 playtime is: " + sumPlayTime2);
         console.log("sum1 + sum2 playtime is: " + sumPlayTime);
     }
 
