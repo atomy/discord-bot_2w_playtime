@@ -85,9 +85,11 @@ function callback2(error, response, body) {
             console.log("retrieved game for '" + playerGame.name + "' is: '" + playerGame.playtime_2weeks + "'");
         }
 
-        if (sumPlayTime > 0 || sumPlayTime2 > 0) {
-            sumPlayTime = Number(((sumPlayTime + sumPlayTime2) / 60).toFixed(1));
+        if (sumPlayTime2 > 0) {
+            sumPlayTime2 = Number((sumPlayTime2 / 60).toFixed(1));
         }
+
+        sumPlayTime += sumPlayTime2;
 
         console.log("sum2 playtime is: " + sumPlayTime2);
         console.log("sum1 + sum2 playtime is: " + sumPlayTime);
