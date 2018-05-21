@@ -6,4 +6,4 @@ Discord bot that includes the current playercount of a steam game in its present
 - API key for Discord-Bot
 
 # How it looks
-![Image of Discord-Bot-Presence](https://github.com/atomy/discord-bot/blob/master/doc/screenshot.png)
+![Image of Discord-Bot-Presence](https://github.com/atomy/discord-bot_2w_playtime/blob/master/doc/screenshot.png)
