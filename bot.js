@@ -53,6 +53,9 @@ function callback(error, response, body) {
         }
 
         if (process.env.TARGET_STEAM_ID2 && process.env.TARGET_STEAM_ID2.length > 0) {
+            const options = {
+                url: 'http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=' + steamApiKey + '&steamid=' + process.env.TARGET_STEAM_ID2 + '&format=json'
+            };
             request(options2, callback2);
             return;
         }
