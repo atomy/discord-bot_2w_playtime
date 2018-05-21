@@ -40,7 +40,7 @@ function callback(error, response, body) {
         const jsonObject = JSON.parse(body);
         var playerGames = jsonObject.response.games;
         const totalCount = jsonObject.response.total_count;
-        var sumPlayTime = 0;
+        sumPlayTime = 0;
 
         for (var i = 0; i < totalCount; i++) {
             var playerGame = playerGames[i];
@@ -77,19 +77,19 @@ function callback2(error, response, body) {
         const jsonObject = JSON.parse(body);
         var playerGames = jsonObject.response.games;
         const totalCount = jsonObject.response.total_count;
-        var sumPlayTime = 0;
+        sumPlayTime2 = 0;
 
         for (var i = 0; i < totalCount; i++) {
             var playerGame = playerGames[i];
-            sumPlayTime += playerGame.playtime_2weeks;
+            sumPlayTime2 += playerGame.playtime_2weeks;
             console.log("retrieved game for '" + playerGame.name + "' is: '" + playerGame.playtime_2weeks + "'");
         }
 
-        if (sumPlayTime > 0) {
-            sumPlayTime = Number((sumPlayTime / 60).toFixed(1));
+        if (sumPlayTime > 0 || sumPlayTime2 > 0) {
+            sumPlayTime = Number(((sumPlayTime + sumPlayTime2) / 60).toFixed(1));
         }
 
-        console.log("sum2 playtime is: " + sumPlayTime);
+        console.log("sum1 + sum2 playtime is: " + sumPlayTime);
     }
 
     if (!error && response.statusCode == 200) {
