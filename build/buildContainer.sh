@@ -2,26 +2,19 @@
 
 set -e
 
-function validateEnv() {
-    if [ -z "${CONTAINER_NAME}" ] ; then
-        echo "ENV variable CONTAINER_NAME is not set!"
-        exit 1
-    fi
-
-    if [ -z "${REGISTRY_ADDRESS}" ] ; then
-        echo "ENV variable REGISTRY_ADDRESS is not set!"
-        exit 1
-    fi
+function clean() {
+    rm -rf /app/node_modules
+    rm -f /app/packages-lock.json
 }
 
 # build container
 function buildContainer() {
     echo "Building Container..."
-    docker build -t atomy/discord-bot:latest .
+    docker build -t atomy/discord-bot_2w_playtime:latest --no-cache .
     echo "Building PHP Container... DONE"
 }
 
-validateEnv
+clean
 buildContainer
 
 echo "ALL DONE"
