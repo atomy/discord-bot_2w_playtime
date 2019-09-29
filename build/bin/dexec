@@ -1,0 +1,3 @@
+#!/bin/bash
+
+docker run -v $(pwd):/app atomy/discord-bot_2w_playtime:latest "$@"
