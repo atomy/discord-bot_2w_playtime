@@ -53,7 +53,7 @@ function shutdownContainer() {
 }
 
 function startupContainer() {
-    scp docker-compose-prod.yml ${DEPLOY_SSH_TARGET}:~/${DEPLOY_DIR}/docker-compose.yml
+    scp docker-compose-prod.yml ${DEPLOY_SSH_TARGET}:~/${DEPLOY_DIR}/docker-compose-dev.yml
     ssh ${DEPLOY_SSH_TARGET} "export USER_ID=`id -u` && export GROUP_ID=`id -g` && cd ${DEPLOY_DIR} && docker-compose pull"
     ssh ${DEPLOY_SSH_TARGET} "export USER_ID=`id -u` && export GROUP_ID=`id -g` && export DOCKER_CLIENT_TIMEOUT=120 && export COMPOSE_HTTP_TIMEOUT=120 && cd ${DEPLOY_DIR}/ && docker-compose up -d"
 }
