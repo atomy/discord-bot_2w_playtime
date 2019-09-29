@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  discord-bot_2w_playtime_haxx0r1337:
+    image: atomy/discord-bot_2w_playtime
+    restart: always
+    environment:
+      - DISCORD_API_KEY=xxxxxxxxx
+      - STEAM_API_KEY=xxxxxxxxxx
+      - TARGET_STEAM_ID=76500000000000000

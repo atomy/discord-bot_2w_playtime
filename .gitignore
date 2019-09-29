@@ -61,7 +61,9 @@ typings/
 
 package-lock.json
 
-docker-compose*.yml
-!docker-compose.superhaxxor93.yml
+docker-compose.*.yml
+
 !docker-compose.dev.yml
 !docker-compose.yml
+!docker-compose-dev.yml
+!docker-compose.haxx0r1337.yml

@@ -2,26 +2,37 @@
 
 set -e
 
-function validateEnv() {
-    if [ -z "${CONTAINER_NAME}" ] ; then
-        echo "ENV variable CONTAINER_NAME is not set!"
-        exit 1
-    fi
+IS_DEV=0
 
-    if [ -z "${REGISTRY_ADDRESS}" ] ; then
-        echo "ENV variable REGISTRY_ADDRESS is not set!"
-        exit 1
-    fi
+if [ "" != "${1}" ] ; then
+  if [ "dev" == "${1}" ] ; then
+    IS_DEV=1
+  else
+    echo "ERROR: Invalid env \"${1}\" given!"
+    exit 1
+  fi
+fi
+
+function clean() {
+    rm -rf /app/node_modules
+    rm -f /app/packages-lock.json
 }
 
 # build container
 function buildContainer() {
+  if [ ${IS_DEV} -eq 1 ] ; then
+    echo "Building Container (dev)..."
+    docker build -t atomy/discord-bot_2w_playtime:latest --no-cache .
+    docker run -v "$(pwd):/app" atomy/discord-bot_2w_playtime:latest npm install
+    echo "Building PHP Container (dev)... DONE"
+  else
     echo "Building Container..."
-    docker build -t atomy/discord-bot:latest .
+    docker build -t atomy/discord-bot_2w_playtime:latest --no-cache .
     echo "Building PHP Container... DONE"
+  fi
 }
 
-validateEnv
+clean
 buildContainer
 
 echo "ALL DONE"
