@@ -25,7 +25,7 @@ const targetPlayerSteamId = process.env.TARGET_STEAM_ID;
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
     console.log('Requesting: ' + options.url);
-    client.user.setActivity('2w playtime: ? h', { type: 'WATCHING' } );
+    client.user.setActivity('2w time: ? h', { type: 'WATCHING' } );
     request(options, callback);
 });
 
@@ -64,9 +64,9 @@ function callback(error, response, body) {
     }
 
     if (!error && response.statusCode == 200) {
-        client.user.setActivity('2w playtime: ' + sumPlayTime + ' h', { type: 'WATCHING' } );
+        client.user.setActivity('2w time: ' + Number((sumPlayTime).toFixed(1)) + ' h', { type: 'WATCHING' } );
     } else {
-        client.user.setActivity('2w playtime: ? h', { type: 'WATCHING' } );
+        client.user.setActivity('2w time: ? h', { type: 'WATCHING' } );
     }
 }
 
@@ -96,9 +96,9 @@ function callback2(error, response, body) {
     }
 
     if (!error && response.statusCode == 200) {
-        client.user.setActivity('2w playtime: ' + sumPlayTime + ' h', { type: 'WATCHING' } );
+        client.user.setActivity('2w time: ' + Number((sumPlayTime).toFixed(1)) + ' h', { type: 'WATCHING' } );
     } else {
-        client.user.setActivity('2w playtime: ? h', { type: 'WATCHING' } );
+        client.user.setActivity('2w time: ? h', { type: 'WATCHING' } );
     }
 }
 
