@@ -1,7 +1,13 @@
 const request = require('request');
 const Discord = require('discord.js');
-const client = new Discord.Client();
+const { Client, GatewayIntentBits, ActivityType } = require('discord.js');
 require('console-stamp')(console, 'HH:MM:ss.l');
+const client = new Client({ intents: [
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.MessageContent,
+    ]
+});
 
 if (!process.env.DISCORD_API_KEY || process.env.DISCORD_API_KEY.length <= 0) {
     console.log('ERROR: Env variable DISCORD_API_KEY does not exists or is empty!');
@@ -25,7 +31,7 @@ const targetPlayerSteamId = process.env.TARGET_STEAM_ID;
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
     console.log('Requesting: ' + options.url);
-    client.user.setActivity('2w time: ? h', { type: 'WATCHING' } );
+    client.user.setActivity('2w time: ? h', { type: ActivityType.Watching } );
     request(options, callback);
 });
 
@@ -64,9 +70,9 @@ function callback(error, response, body) {
     }
 
     if (!error && response.statusCode == 200) {
-        client.user.setActivity('2w time: ' + Number((sumPlayTime).toFixed(1)) + ' h', { type: 'WATCHING' } );
+        client.user.setActivity('2w time: ' + Number((sumPlayTime).toFixed(1)) + ' h', { type: ActivityType.Watching } );
     } else {
-        client.user.setActivity('2w time: ? h', { type: 'WATCHING' } );
+        client.user.setActivity('2w time: ? h', { type: ActivityType.Watching } );
     }
 }
 
@@ -96,9 +102,9 @@ function callback2(error, response, body) {
     }
 
     if (!error && response.statusCode == 200) {
-        client.user.setActivity('2w time: ' + Number((sumPlayTime).toFixed(1)) + ' h', { type: 'WATCHING' } );
+        client.user.setActivity('2w time: ' + Number((sumPlayTime).toFixed(1)) + ' h', { type: ActivityType.Watching } );
     } else {
-        client.user.setActivity('2w time: ? h', { type: 'WATCHING' } );
+        client.user.setActivity('2w time: ? h', { type: ActivityType.Watching } );
     }
 }
 

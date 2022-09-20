@@ -1,4 +1,7 @@
-FROM node:9.5
+FROM node:18-alpine
+
+RUN apk add --update icu-data-full npm
+RUN npm install -g npm
 
 RUN mkdir /app
 
